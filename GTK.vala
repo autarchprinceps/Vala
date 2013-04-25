@@ -1,13 +1,25 @@
 using Gtk;
 
 class Demo : Window {
+	private Paned layout;
+	private Button button;
+	private Entry textField;
+
 	public Demo() {
-        this.title = "This is a window";
-        set_default_size(250, 200);
+        this.title = "Demo";
+        set_default_size(250, 60);
         set_position(WindowPosition.CENTER);
+
 		this.destroy.connect(Gtk.main_quit);
-        var button = new Button.with_label("Click");
-        add(button);
+		
+		textField = new Entry();
+		layout.add(textField);
+        button = new Button.with_label("Click");
+		button.clicked.connect(() => {
+			button.label = textField.buffer.text;
+		});
+        layout.add(button);
+		add(layout);
 		show_all();
 	}
 
