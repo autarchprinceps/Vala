@@ -1,19 +1,20 @@
-class Main {
-	public static int a = 0;
-	public static string? t = null;
-	public static async void count() {
-		while(Main.a < 9999999) {
-			i++;
-			yield;
-		}
-	}
-	public static int main(string[] args) {
-		stdout.printf("Starting ...\n");
-		count();
-		while(t != "exit") {
-			stdout.printf(Main.a.to_string() + "\n");
-			t = stdin.read_line();
-		}
-		return 0;
-	}
+class AsyncDemo {
+
+    static async int adder (int a, int b) {
+        return a + b;
+    }
+
+    static async void start () {
+        int sum = yield adder (4, 5);
+        stdout.printf ("Addition completed\n");
+        stdout.printf ("Result was: %d\n", sum);
+    }
+
+    static void main () {
+        start ();
+
+        /* wait */
+        var loop = new MainLoop (null, false);
+        loop.run ();
+    }
 }
